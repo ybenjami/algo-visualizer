@@ -1,38 +1,71 @@
 .App {
-  text-align: center;
+    margin: 0 25px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.array-container  {
+   position: absolute;
+   background-color: #173F5F;
+   font-size: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.array-container span {
+    position: absolute;
+    bottom: 0;
+    margin-left: 2px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.array-bar {
+    width: 15px;
+    background-color: #20639B;
+    display: inline-block;
+    margin: 0 2px;
 }
 
-.App-link {
-  color: #61dafb;
+.array-bar-working {
+    width: 15px;
+    background-color: #ED553B;
+    display: inline-block;
+    margin: 0 2px;
+    font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.array-bar-swapping {
+    width: 15px;
+    background-color: #F6D55C;
+    display: inline-block;
+    margin: 0 2px;
+    color: black;
+    font-weight: bold;
+}
+
+.counter{
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0 4px 0 2px;
+}
+
+.array-index {
+    margin-left: 15px;
+}
+
+.array-sizer {
+    margin: 5px 55px;
+}
+
+.algo-explain {
+    position: absolute;
+    margin: 80px 30px 0 30px;
+    
+}
+
+.foo {
+    position: absolute;
+}
+
+h1 {
+    text-align: center;
+}
+
+body {
+    margin-left: 20px;
 }
