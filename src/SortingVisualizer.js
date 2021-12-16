@@ -3,9 +3,11 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import CreateIcon from '@material-ui/icons/Create';
-import InsertionSort from './SortingVisualizer/InsertionSort';
-import BubbleSort from './SortingVisualizer/BubbleSort';
+import InsertionSort from './SortingVisualizer/InsertionSortRedux';
+import BubbleSort from './SortingVisualizer/BubbleSortRedux';
 import SelectionSort from "./SortingVisualizer/SelectionSort";
+import QuickSort from "./SortingVisualizer/QuickSort";
+ 
 
 const SortingVisualizer = () => {
     const maxAllowedArraySize = 50;
@@ -65,10 +67,10 @@ const SortingVisualizer = () => {
             <Button onClick={() => setAlgo('bubble')}  color="primary">Bubble Sort</Button>
             <Button onClick={() => setAlgo('insertion')} color="primary">Insertion Sort</Button>
             <Button onClick={() => setAlgo('selection')} color="primary">Selection Sort</Button>
-            <Button  color="primary">Radix Sort</Button>
+           
             <Button  color="primary">Merge Sort</Button>
             <Button  color="primary">Heap Sort</Button>
-            <Button  color="primary">Quick Sort</Button>
+            <Button onClick={() => setAlgo('quick')} color="primary">Quick Sort</Button>
             
             { !algo && listArray.length > 0 &&
             <div>
@@ -79,7 +81,6 @@ const SortingVisualizer = () => {
             </div>
             
             }
-           <div> <h3>{algo}</h3> </div>
            <div>
                {algo === 'insertion' && <InsertionSort input={randomArray} />}
            </div>
@@ -90,6 +91,9 @@ const SortingVisualizer = () => {
 
            <div>
                {algo === 'selection' && <SelectionSort input={randomArray} />}
+           </div>
+           <div>
+               {algo === 'quick' && <QuickSort input={randomArray} />}
            </div>
           
         </div>

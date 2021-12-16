@@ -4,27 +4,27 @@ import CreateIcon from '@material-ui/icons/Create';
 
 
 const Kadane = () => {
-    const maxAllowedArraySize = 15;
-    const [randomArray, setRandomArray] = useState([]);
+    const maxAllowedArraySize = 24;
     const [count] = useState(maxAllowedArraySize);
-    const [maxSoFar, setMaxSoFar] = useState(0);
-    const [start, setStart] = useState(0);
-    const [end, setEnd] = useState(0);
+    const [maxSoFar,setMaxSoFar] = useState(0);
+    const [frame, setFrame] = useState({array: [], a: 0, b: 0, c: 0, maxSoFar: 0});
     
 
     const randomInt = () => {
-        const min = Math.ceil(10);
-        const max = Math.floor(-10);
+        const min = Math.ceil(9);
+        const max = Math.floor(-9);
         return Math.floor(Math.random() * (max - min + 1) + min)
-        
-    }
-
-    const listArray = randomArray.map((val, index) =>{
-        if(index >= start && index <= end){
-            return <div className={`array-bar-working {index}`} style={{height: `5px`}}><span>{val}</span></div>;
         }
-            return <div className={`array-bar ${index}`}><span>{val}</span></div>;
-      });
+
+    const listArray = frame.array.map((val, index) =>{
+        if(frame.b <= index && frame.c >= index) {
+                return<Button variant="contained" color="secondary"><span>{val}</span></Button>;
+        }
+    
+                return <Button variant="outlined" color="primary" ><span>{val}</span></Button>;
+         });
+
+
 
 
     const algo = () => {
@@ -32,6 +32,10 @@ const Kadane = () => {
          let indexStart = 0;
          let indexEnd = 0
          let sum = 0;
+
+         const randomArray = frame.array;
+
+         const animation = [];
          for (let i =0; i < randomArray.length; i++){
              maxEndingHere += randomArray[i];
              maxEndingHere = Math.max(maxEndingHere, 0);
@@ -42,27 +46,47 @@ const Kadane = () => {
              if(maxEndingHere > sum) {
                 sum = maxEndingHere;
                 indexEnd=i;
-             }
-            
+                animation.push(animationStep(randomArray, i, indexStart, indexEnd, sum));
+             }     
          }
-         console.log(indexStart, indexEnd);
-         setStart(indexStart)
-         setEnd(indexEnd);
-         setMaxSoFar(sum);
-         return maxSoFar;
+                 
+            for(let j = 0; j < animation.length; j++){
+                animateFrame(j, animation[j]);
+         }
+        
+
+         return;
     }
 
 
     const genArray = () => {
-        setMaxSoFar(0);
-        setEnd(-1)
-        setStart(100)
         let rando = [];
         for(let i=0; i < count; i++){
             rando.push(randomInt());
         }  
-        setRandomArray(rando);
+       
+        const init = animationStep(rando, 0,0,0,0);
+        setFrame(init);
     };
+
+
+    const animateFrame = (i, item) => {
+        setTimeout(() => {
+          setFrame(item)
+          setMaxSoFar(item.max);
+        }, (i * 700 ));
+      }
+
+
+      const animationStep = (array, largest, index, current, max)=>{
+        return {
+           array: array.slice(0),
+           a: largest,
+           b: index,
+           c: current,
+           max,
+        }
+    }
 
     return(
         <div>
@@ -81,13 +105,12 @@ const Kadane = () => {
            
             {listArray.length > 0 &&
             <div>
-                <div className="array-container" >
+                <div>
                     {listArray}
                 </div>
                 <br/>
-                {maxSoFar > 0 &&
                     <div> Value: {maxSoFar} </div>
-                }
+            
             </div>
             
             }
